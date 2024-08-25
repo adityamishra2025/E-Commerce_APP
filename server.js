@@ -25,8 +25,8 @@ const app = express();
 
 //middlewares
 app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+app.use(express.json());  //enable json
+app.use(morgan("dev"));   // for DB
 app.use(express.static(path.join(__dirname, './client/build')));//extra
 
 
@@ -40,7 +40,7 @@ app.use("/api/v1/product", productRoutes);
 // app.get('/', (req, res) =>{
 //     res.send("<h1>Backend of Arrow Cart Application</h1>");
 // });
-app.use('*', function(req, res){
+app.use('*', function (req, res) {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 })
 
@@ -48,6 +48,6 @@ app.use('*', function(req, res){
 const PORT = process.env.PORT || 8080;
 
 //run listen
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`Server is running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan.white);
 })
