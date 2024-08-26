@@ -89,6 +89,7 @@ export const loginController = async (req, res) => {
       });
     }
 
+    //compare normal and hashed passowords
     const match = await comparePassword(password, user.password);
     if (!match) {
       return res.status(200).send({
@@ -97,7 +98,7 @@ export const loginController = async (req, res) => {
       });
     }
 
-    //token
+    //token to add extra security
     const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
